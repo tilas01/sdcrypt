@@ -165,7 +165,7 @@ def main():
             print("e.g. /path/to/folder/or/disk")
             filepath = input("Response: ")
             if not os.path.isdir(filepath):
-                print("Invalid Encryption Request")
+                print("Invalid Encryption Request\n")
             else:
                 for dirpath, dirname, filename in os.walk(filepath):
                     for x in filename:
@@ -175,14 +175,14 @@ def main():
                     for x in dirname:
                         path = os.path.join(dirpath, x)
                         encrypt(path)
-            print("Encryption complete!\n")
+                print("Encryption complete!\n")
 
         elif a == "d":
             print("\nPlease enter the full path of the folder/disk you want to recursively decrypt.")
             print("e.g. /path/to/folder/or/disk")
             filepath = input("Response: ")
             if not os.path.isdir(filepath):
-                print("Invalid Decryption Request")
+                print("Invalid Decryption Request\n")
             else:
                 try:
                     for dirpath, dirname, filename in os.walk(filepath):
@@ -202,9 +202,6 @@ def main():
 
         elif a == "q":
             leave()
-
-        else:
-            print("Invalid Input.")
 
 if __name__ == '__main__':
     main()
