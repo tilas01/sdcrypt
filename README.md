@@ -21,7 +21,7 @@ Use this program at your own risk. I am not responsible your data. Always keep a
 
 ### Why?
 ---
-I wanted to encrypt my SD cards so I modified my [`pylocker`]("https://www.github.com/tilas01/pylocker") project to support recursive encryption/decryption
+I wanted to encrypt my SD cards so I modified my [`pylocker`](https://www.github.com/tilas01/pylocker) project to support recursive encryption/decryption
 
 ### Requirements
 ---
