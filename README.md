@@ -32,7 +32,7 @@ To use this program you will require [`python`](https://www.python.org/) 3.9 or 
 Install with [`git`](https://git-scm.com/)
 ```
 $ git clone https://github.com/tilas0/sdcrypt.git
-$ cd pylocker
+$ cd sdcrypt
 $ pip3 install -r requirements.txt
 $ python3 main.py
 ```
@@ -60,8 +60,9 @@ Create a "config" directory in the same location as pylocker. Then in that confi
 ### Features
 ---
 - Cryptographically secure encryption/decryption, password hashing and salt generation
-- Any file or folder can be encrypted
-- Filename encryption/decryption
+- Any folder or drive can be encrypted
+- Recursive encryption
+- File and folder name encryption/decryption
 - Password input is not displayed
 - Cross-platform support
 
