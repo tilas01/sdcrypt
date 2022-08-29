@@ -17,8 +17,7 @@ Contents
 
 ### Disclaimer
 ---
-Use this program at your own risk. I am not responsible your data.
-Always keep a backup
+Use this program at your own risk. I am not responsible your data. Always keep a backup
 
 ### Why?
 ---
