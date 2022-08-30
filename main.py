@@ -44,10 +44,10 @@ def main():
                 with open(newname, "wb") as file:
                     file.write(data)
                 print(f"Encrypted {oldname}")
-        except OSError:
-            print(f"OSError occured while encrypting {oldname}.")
-        except:
-            print(f"Unknown error occured while encrypting {oldname}.")
+        except OSError as error:
+            print(f"OSError occured while encrypting {oldname}.\n{error}\n")
+        except as error:
+            print(f"Unknown error occured while encrypting {oldname}.\n{error}\n")
 
     def decrypt(dir):
         try:
@@ -69,11 +69,11 @@ def main():
                     file.write(data)
                 print("Decrypted " + newname.decode())
         except InvalidToken:
-            raise StopIteration
-        except OSError:
-            print(f"OSError occured while decrypting {oldname}.")
-        except:
-            print(f"Unknown error occured while decrypting {oldname}.")
+            print(f"{oldname} is not encrypted.")
+        except OSError as error:
+            print(f"\nOSError occured while decrypting {oldname}.\n{error}\n")
+        except as error:
+            print(f"Unknown error occured while decrypting {oldname}.\n{error}\n")
 
     if not os.path.isdir("config"):
         print("Creating config...")
@@ -132,10 +132,11 @@ def main():
     if 'b64salt' in locals():
         print('Your salt is "' + b64salt + '". Keep it safe.')
         print("If you lose your salt all data encrypted with it WILL be unrecoverable.\n")
-    print("Welcome to sdcrypt!\nThis program will securely encrypt/decrypt all files and folders in a specified location recursively.\n")
+    print("Welcome to sdcrypt!\nThis program will securely encrypt/decrypt all files and folders in a specified location recursively.\nIt can also encrypt single files.\n")
     print("Remember:")
     print("Do not rename any encrypted files or folders.")
     print("Do not encrypt a folder or drive more than once.")
+    print("Do not modify files, folders or their contents while encrypted")
     print("Use this program at your own risk. I am not responsbile for your data.")
     print("Always keep a backup.\n")
     while True:
@@ -161,12 +162,10 @@ def main():
         a = input("Choose a command: [(e)ncrypt / (d)ecrypt / (c)lear / (q)uit]: ")
 
         if a == "e":
-            print("\nPlease enter the full path of the folder/disk you want to recursively encrypt.")
-            print("e.g. /path/to/folder/or/disk")
+            print("\nPlease enter the full path of the file/folder you want to encrypt.")
+            print("e.g. /path/to/file/or/folder")
             filepath = input("Response: ")
-            if not os.path.isdir(filepath):
-                print("Invalid Encryption Request\n")
-            else:
+            if os.path.isdir(filepath):
                 for dirpath, dirname, filename in os.walk(filepath):
                     for x in filename:
                         path = os.path.join(dirpath, x)
@@ -176,26 +175,31 @@ def main():
                         path = os.path.join(dirpath, x)
                         encrypt(path)
                 print("Encryption complete!\n")
+            elif os.path.isfile(filepath):
+                encrypt(filepath)
+                print("Encryption complete!\n")
+            else:
+                print("Invalid Encryption Request\n")
 
         elif a == "d":
-            print("\nPlease enter the full path of the folder/disk you want to recursively decrypt.")
-            print("e.g. /path/to/folder/or/disk")
+            print("\nPlease enter the full path of the file/folder you want to decrypt.")
+            print("e.g. /path/to/file/or/folder")
             filepath = input("Response: ")
-            if not os.path.isdir(filepath):
-                print("Invalid Decryption Request\n")
+            if os.path.isdir(filepath):
+                for dirpath, dirname, filename in os.walk(filepath):
+                    for x in filename:
+                        path = os.path.join(dirpath, x)
+                        decrypt(path)
+                for dirpath, dirname, filename in os.walk(filepath):
+                    for x in dirname:
+                        path = os.path.join(dirpath, x)
+                        decrypt(path)
+                print("Decryption complete!\n")
+            elif os.path.isfile(filepath):
+                decrypt(filepath)
+                print("Decryption complete!\n")
             else:
-                try:
-                    for dirpath, dirname, filename in os.walk(filepath):
-                        for x in filename:
-                            path = os.path.join(dirpath, x)
-                            decrypt(path)
-                    for dirpath, dirname, filename in os.walk(filepath):
-                        for x in dirname:
-                            path = os.path.join(dirpath, x)
-                            decrypt(path)
-                    print("Decryption complete!\n")
-                except StopIteration:
-                    print("File(s) are not encrypted.\n")
+                print("Invalid Decryption Request\n")
 
         elif a == "c":
             clear()
