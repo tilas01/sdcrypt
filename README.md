@@ -60,7 +60,8 @@ Create a "config" directory in the same location as pylocker. Then in that confi
 ### Features
 ---
 - Cryptographically secure encryption/decryption, password hashing and salt generation
-- Any folder or drive can be encrypted
+- Base64 salt so it can be written down or stored easily
+- Any file or folder can be encrypted
 - Recursive encryption
 - File and folder name encryption/decryption
 - Password input is not displayed
