@@ -1,6 +1,6 @@
 
 # sdcrypt
-An easy-to-use python application to recursively encrypt/decrypt your drives.
+An easy-to-use python application to encrypt/decrypt your files or folders.
 
 Contents
 ========
