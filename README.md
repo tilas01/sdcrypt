@@ -39,23 +39,31 @@ $ python3 main.py
 
 ### Use
 ---
-To reset your password:
 
-``
+#### Update:
+
+Clone the git repo and move your config folder into it. Then replace the old folder with the new one.
+or
+Run the following commands with [`git`](https://git-scm.com/) installed in your [`sdcrypt`](https://www.github.com/tilas01/sdcrypt) directory:
+
+```
+$ git pull
+$ pip3 install -r requirements.txt
+```
+
+This will check the git repo for updates and install any new requirements if possible.
+
+#### Reset your password:
+
 Ensure all files are in a decrypted state. Then delete the "hash" file located in the config directory.
-``
 
-To reset your salt:
+#### Reset your salt:
 
-``
 Ensure all files are in a decrypted state. Then delete the "hash" and "salt" files located in the config directory. This will also reset your password.
-``
 
-To use a backed up salt:
+#### Use a backed up salt:
 
-``
 Create a "config" directory in the same location as pylocker. Then in that config directory create an extensionless file named "salt" and put the salt into that file.
-``
 
 ### Features
 ---
