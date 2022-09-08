@@ -1,6 +1,7 @@
 def main():
     import os
     import sys
+    from requests import get
     from base64 import urlsafe_b64encode, urlsafe_b64decode
     from time import sleep
     from hashlib import pbkdf2_hmac
@@ -9,6 +10,19 @@ def main():
     from cryptography.hazmat.backends import default_backend
     from cryptography.hazmat.primitives import hashes
     from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+
+    currentversion = "1.0.0"
+
+    try:
+        version = get("https://raw.githubusercontent.com/tilas01/sdcrypt/main/version")
+        if str(version) != "<Response [200]>":
+            print("Could not reach update server.\nYou can manually check for updates at https://www.github.com/tilas01/sdcrypt.\n")
+        elif version.text != currentversion:
+            print(f"An update is avaliable at https://www.github.com/tilas01/sdcrypt\nYour Version: {currentversion}\nNew Version: {version.text}\n")
+    except Exception as error:
+        print("Could not reach update server.\nYou can manually check for updates at https://www.github.com/tilas01/sdcrypt.\n")
+
+    systemfilenames = ["System Volume Information", "$RECYCLE.BIN", "desktop.ini"]
 
     def leave():
         while True:
@@ -27,7 +41,10 @@ def main():
 
     def encrypt(dir):
         try:
-            if os.path.isdir(dir):
+            if os.path.basename(dir) in systemfilenames:
+                filename = os.path.basename(dir)
+                print(f"Ignoring {filename} as it is a system file.")
+            elif os.path.isdir(dir):
                  oldname = os.path.basename(dir)
                  newname = f.encrypt(oldname.encode())
                  os.chdir(os.path.dirname(dir))
@@ -45,13 +62,16 @@ def main():
                     file.write(data)
                 print(f"Encrypted {oldname}")
         except OSError as error:
-            print(f"OSError occured while encrypting {oldname}.\n{error}\n")
-        except as error:
-            print(f"Unknown error occured while encrypting {oldname}.\n{error}\n")
+            print(f"\nOSError occured while encrypting {oldname}.\n{error}\n")
+        except Exception as error:
+            print(f"\nUnknown error occured while encrypting {oldname}.\n{error}\n")
 
     def decrypt(dir):
         try:
-            if os.path.isdir(dir):
+            if os.path.basename(dir) in systemfilenames:
+                filename = os.path.basename(dir)
+                print(f"Ignoring {filename} as it is a system file.")
+            elif os.path.isdir(dir):
                 oldname = os.path.basename(dir)
                 newname = f.decrypt(oldname.encode())
                 os.chdir(os.path.dirname(dir))
@@ -72,8 +92,8 @@ def main():
             print(f"{oldname} is not encrypted.")
         except OSError as error:
             print(f"\nOSError occured while decrypting {oldname}.\n{error}\n")
-        except as error:
-            print(f"Unknown error occured while decrypting {oldname}.\n{error}\n")
+        except Exception as error:
+            print(f"\nUnknown error occured while decrypting {oldname}.\n{error}\n")
 
     if not os.path.isdir("config"):
         print("Creating config...")
@@ -132,7 +152,10 @@ def main():
     if 'b64salt' in locals():
         print('Your salt is "' + b64salt + '". Keep it safe.')
         print("If you lose your salt all data encrypted with it WILL be unrecoverable.\n")
-    print("Welcome to sdcrypt!\nThis program will securely encrypt/decrypt all files and folders in a specified location recursively.\nIt can also encrypt single files.\n")
+    print("Welcome to sdcrypt!")
+    if version.text == currentversion:
+        print("You are on the latest version.")
+    print("This program will securely encrypt/decrypt all files and folders in a specified location recursively.\nIt can also encrypt single files.\n")
     print("Remember:")
     print("Do not rename any encrypted files or folders.")
     print("Do not encrypt a folder or drive more than once.")
