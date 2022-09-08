@@ -11,7 +11,10 @@ def main():
     from cryptography.hazmat.primitives import hashes
     from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
-    currentversion = "1.0.0"
+    currentversion = "1.0.1"
+
+    # Assumes you are not on the latest version until checked below
+    latestversion = False
 
     try:
         version = get("https://raw.githubusercontent.com/tilas01/sdcrypt/main/version")
@@ -19,6 +22,8 @@ def main():
             print("Could not reach update server.\nYou can manually check for updates at https://www.github.com/tilas01/sdcrypt.\n")
         elif version.text != currentversion:
             print(f"An update is avaliable at https://www.github.com/tilas01/sdcrypt\nYour Version: {currentversion}\nNew Version: {version.text}\n")
+        elif version.text == currentversion:
+            latestversion = True
     except Exception as error:
         print("Could not reach update server.\nYou can manually check for updates at https://www.github.com/tilas01/sdcrypt.\n")
 
@@ -153,7 +158,7 @@ def main():
         print('Your salt is "' + b64salt + '". Keep it safe.')
         print("If you lose your salt all data encrypted with it WILL be unrecoverable.\n")
     print("Welcome to sdcrypt!")
-    if version.text == currentversion:
+    if latestversion:
         print("You are on the latest version.")
     print("This program will securely encrypt/decrypt all files and folders in a specified location recursively.\nIt can also encrypt single files.\n")
     print("Remember:")
