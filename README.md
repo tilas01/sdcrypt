@@ -1,5 +1,5 @@
-
 # sdcrypt
+
 An easy-to-use python application to encrypt/decrypt your files or folders.
 
 Contents
@@ -16,20 +16,29 @@ Contents
  * [License](#license)
 
 ### Disclaimer
+
 ---
+
 Use this program at your own risk. I am not responsible your data. Always keep a backup
 
 ### Why?
+
 ---
+
 I wanted to encrypt my SD cards so I modified my [`pylocker`](https://www.github.com/tilas01/pylocker) project to support recursive encryption/decryption
 
 ### Requirements
+
 ---
+
 To use this program you will require [`python`](https://www.python.org/) 3.9 or higher
 
 ### Installation
----
+
+ℹ️ If you have previously used PyLocker and are updating after installing by running the below please review the [Use](#use) section to update from your current config, if this is your first time using sdcrypt and have never used PyLocker you can safely ignore this message. ℹ️
+
 Install with [`git`](https://git-scm.com/)
+
 ```
 $ git clone https://github.com/tilas0/sdcrypt.git
 $ cd sdcrypt
@@ -38,16 +47,21 @@ $ python3 main.py
 ```
 
 ### Use
+
 ---
 
-#### Update:
+#### Disclaimer: Dont ignore instructions when they guide you to ensure your files are encrypted as it can lead to irrecoverable data loss.
+
+#### Update from DEPRECATED PyLocker:
 
 Clone the git repo and move your config folder into it. Then replace the old folder with the new one.
 or
 Run the following commands with [`git`](https://git-scm.com/) installed in your [`sdcrypt`](https://www.github.com/tilas01/sdcrypt) directory:
 
 ```
+#Updates repo to latest version of sdcrypt.
 $ git pull
+#Installs needed requirements. If you're migrating from pylocker, you already have these installed, but its always a good idea to update your requirements as the cryptography module (only requirement) may have bug fixes and improvements in newer versions which is all the below installs to allow the program to function.
 $ pip3 install -r requirements.txt
 ```
 
@@ -63,10 +77,14 @@ Ensure all files are in a decrypted state. Then delete the "hash" and "salt" fil
 
 #### Use a backed up salt:
 
+The salt can be from sdcrypt or PyLocker if you're migrating, the programs are both compatible as sdcrypt is just a more advanced version of pylocker.
+
 Create a "config" directory in the same location as pylocker. Then in that config directory create an extensionless file named "salt" and put the salt into that file.
 
 ### Features
+
 ---
+
 - Cryptographically secure encryption/decryption, password hashing and salt generation
 - Base64 salt so it can be written down or stored easily
 - Any file or folder can be encrypted
@@ -76,5 +94,7 @@ Create a "config" directory in the same location as pylocker. Then in that confi
 - Cross-platform support
 
 ### License
+
 ---
+
 Licensed under the [MIT License](LICENSE)
