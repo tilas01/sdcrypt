@@ -59,7 +59,7 @@ How to install Python3 on any other OS:
 
 Visit the [Python3](https://www.python.org/downloads) official website, go to downloads and install the version of Python3 that matches your Operating System
 
-You may then follow the above stepts under "Install with git" excluding the git clone page and instead by downloading the repo directly from GitHub and extracting the archive then simply cd into it and install using pip3 with python3. These installation steps can be followed to install sdcrypt on any operating system python3 supports (Windows, MacOS, Linux, etc) making sdcrypt highly cross-compatible with many operating systems.
+You may then follow the above stepts under "Install with git" excluding the command that clones this repository using git clone and instead by downloading the repo directly from GitHub and extracting the archive then simply cd into it and install using pip3 with python3. These installation steps can be followed to install sdcrypt on any operating system python3 supports (Windows, MacOS, Linux, etc) making sdcrypt highly cross-compatible with many operating systems.
 
 
 
