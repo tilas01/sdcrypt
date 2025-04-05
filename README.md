@@ -37,7 +37,7 @@ To use this program you will require [`python`](https://www.python.org/) 3.9 or 
 
 ℹ️ If you have previously used PyLocker and are updating after installing by running the below please review the [Use](#use) section to update from your current config, if this is your first time using sdcrypt and have never used PyLocker you can safely ignore this message. ℹ️
 
-Install with [`git`](https://git-scm.com/)
+Install with [`git`](https://git-scm.com/) ([Python3](https://www.python.org/downloads) required)
 
 ```
 $ git clone https://github.com/tilas0/sdcrypt.git
@@ -45,6 +45,23 @@ $ cd sdcrypt
 $ pip3 install -r requirements.txt
 $ python3 main.py
 ```
+
+Install without git ([Python3](https://www.python.org/downloads) required)
+
+How to install Python3 on Linux with the apt package manager:
+
+```
+$ sudo apt update
+$ sudo apt install python3
+```
+
+How to install Python3 on any other OS:
+
+Visit the [Python3](https://www.python.org/downloads) official website, go to downloads and install the version of Python3 that matches your Operating System
+
+You may then follow the above stepts under "Install with git" excluding the git clone page and instead by downloading the repo directly from GitHub and extracting the archive then simply cd into it and install using pip3 with python3. These installation steps can be followed to install sdcrypt on any operating system python3 supports (Windows, MacOS, Linux, etc) making sdcrypt highly cross-compatible with many operating systems.
+
+
 
 ### Use
 
